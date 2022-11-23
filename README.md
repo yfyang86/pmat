@@ -79,7 +79,7 @@ And run:
 make test
 ```
 
-The parameters are the same as [metline](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used.
+The parameters are the same as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used.
 
 
 
