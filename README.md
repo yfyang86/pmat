@@ -10,17 +10,17 @@ PMAT detects the differentially methylated regions (DMRs).
 
 C/C++ version could be found in `./proc/` folder. 
 
-- **Abilities**
- 1. pmat utilizes a totally different loss-function to tackle the non-order problem in `twin` data, which fails to distinguish "value 1 - value 2" versus "value 2 - value 1";
- 2. pmat provides several optimization routines with different initial value schemes to solve the corresponding MLE to balance the computation accuracy, speed and scalbility (EM / BFGS).
+1. **Abilities**
+ - `pmat` utilizes a totally different loss-function to tackle the non-order problem in `twin` data, which fails to distinguish `Effect 1 - Effect 2` versus `Effect 2 - Effect 1`;
+ - `pmat` provides several optimization routines with different initial value schemes to solve the corresponding MLE to balance the computation accuracy, speed and scalbility (EM / BFGS).
 
-- **Transferability and Extendibility**
- 1. pmat share the same options as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/) .
- 2. In the future, `pmat` plans to provide options to call the original [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/).
+2. **Transferability and Extendibility**
+ - `pmat` shares the same options as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/) .
+ - In the future, `pmat` plans to provide options to call the original [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/).
 
-- **Soft Engineering on [metilene]**(https://www.bioinf.uni-leipzig.de/Software/metilene/)   
- 1. Bug fix
- 2. Port from C89 to Modern C++11
+3. **Soft Engineering on** [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/)   
+ - Bug fix
+ - Port `metilene` from ANSI-C to Modern C++11 (partly)
 
 ### Pre-install
 
