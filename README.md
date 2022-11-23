@@ -8,12 +8,23 @@ PMAT detects the differentially methylated regions (DMRs).
 
 ## C/C++ program
 
-C/C++ version could be found in `./proc/` folder. This projects extends [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/).
+C/C++ version could be found in `./proc/` folder. 
+
+- **Abilities**
+ 1. pmat utilizes a totally different loss-function to tackle the non-order problem in `twin` data, which fails to distinguish "value 1 - value 2" versus "value 2 - value 1";
+ 2. pmat provides several optimization routines with different initial value schemes to solve the corresponding MLE to balance the computation accuracy, speed and scalbility (EM / BFGS).
+
+- **Transferability and Extendibility**
+ 1. pmat share the same options as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/) .
+ 2. In the future, `pmat` plans to provide options to call the original [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/).
+
+- **Soft Engineering on [metilene]**(https://www.bioinf.uni-leipzig.de/Software/metilene/)   
+ 1. Bug fix
+ 2. Port from C89 to Modern C++11
 
 ### Pre-install
 
-Required:
-
+#### Required
 A modern C++ compiler with a GNU library is need:
 
 ```
@@ -27,10 +38,16 @@ Libraries: GSL-2.x
 
 ```bash
 # debian/ubuntu 
-apt-install build-essential libgsl-dev
+apt-install libgsl-dev
 # Centos/RH
 yum install libgsl-devel
 ```
+
+#### Optional
+
+> **Note**: 
+For Windows user, one could try to compile and run `pmat` with Cygwin or WSL2.
+For MAC OS user, `Home brew` is recommended to install GSL with `brew install gsl` and properly tune the thread numbers. Otherwise, one should compile the GSL from the source and run `pmat` with `-t 1` option. 
 
 ### INSTALL
 
@@ -64,24 +81,27 @@ make test
 
 The parameters are the same as [metline](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used.
 
-> **Note**: 
-For Windows user, one could try to compile and run `pmat` with Cygwin or WSL2.
-For MAC OS user, `Home brew` is recommended to install GSL with `brew install gsl` and properly tune the thread numbers. Otherwise, one should compile the GSL from the source and run `pmat` with `-t 1` option. 
 
-# Examples:
 
+# Usage and Examples
+
+**TODO**
+**TODO**
 **TODO**
 
 ## License
 
-C/C++ version (in the proc folder)
+C/C++ version (in the `./proc` folder):
 - `mm2.h`, `mm2.cpp`： Apache-2.0
 - Others： GPL v2.0
 
 ## Change logs:
 
-- [x] Initial the projects
+- [x] 2022-11-22: Initial the pmat projects
+- [ ] 2022-11: v-0.1 binary-preview-release (in plan)
+- [ ] 2022-11: Example/Simulation (in plan)
 
 
 ## Wishing List
 
+- [ ] [Simulation Demos](./TODO.md): 
