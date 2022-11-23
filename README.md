@@ -27,7 +27,7 @@ Libraries: GSL-2.x
 
 ```bash
 # debian/ubuntu 
-apt-install libgsl-dev
+apt-install build-essential libgsl-dev
 # Centos/RH
 yum install libgsl-devel
 ```
@@ -38,7 +38,7 @@ Currently, users could use the dev-version, i.e. compile the source to use this 
 
 ```bash
 git clone https://github.com/yfyang86/pmat
-cd ./proc/
+cd ./pmat/proc/
 make
 ```
 
@@ -70,7 +70,7 @@ For MAC OS user, `Home brew` is recommended to install GSL with `brew install gs
 
 # Examples:
 
-** TODO **
+**TODO**
 
 ## License
 
