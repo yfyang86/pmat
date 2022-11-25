@@ -98,8 +98,13 @@ C/C++ version (in the `./proc` folder):
 ## Change logs:
 
 - [x] 2022-11-22: Initial the pmat projects
-- [ ] 2022-11: v-0.1 binary-preview-release (in plan)
-- [ ] 2022-11: Example/Simulation (in plan)
+- [ ] 2022-11: v-0.1 binary-preview-release 
+  - [x] Linux (X86-64)
+  - [x] Mac OSX (ARM/Intel)
+  - [x] Windows
+- [ ] 2022-11: Example/Simulation
+	- [x] Simple demo
+	- [ ] Full example (in plan)
 
 
 ## Wishing List

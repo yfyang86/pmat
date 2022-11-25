@@ -42,8 +42,24 @@ tar vxf metilene-0.1-osx-arm64-apple-darwin21.6.0.tag.gz
 
 ## OSX-X86
 
-TODO
+```bash
+cd ./release/OSX-Intel
+tar vxf metilene-0.1-osx-x86_64-apple-darwin21.6.0.tar.gz
+./metilene --help
+```
 
 ## Windows
 
-Not available (unless use Cygwin/WSL)
+Thanks to the R-core team, now we could install 
+
+Preinstall:  [Rtools42](https://cran.r-project.org/bin/windows/Rtools/rtools42/files/rtools42-5355-5357.exe)
+
+Environment: run `C:\rtools42\ucrt64.exe`, and in the bash, run:
+
+```shell
+# to where you download pmat
+cd pmat
+cd ./release/Win64
+tar vxf metilene-0.1-win64-rtools42.tar.gz
+./metilene --help
+```
