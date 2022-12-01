@@ -37,6 +37,7 @@ clean:
 test1: 
 	./metilene -t 32 -a A -b B -X 104 -Y 104 -m 5 -d 0.01 ../examples/salt.test.dat > test.mr.DMR
 
+
 test: test1
 
 .PHONY: all clean
