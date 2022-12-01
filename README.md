@@ -25,14 +25,16 @@ C/C++ version could be found in `./proc/` folder.
 ### Pre-install
 
 #### Required
-A modern C++ compiler with a GNU library is need:
+A modern C++ compiler with a GNU library is needed:
 
 ```
 C++: C++11
 Libraries: GSL-2.x
 ```
 
-- To enable the parallel computing ability (`-t` option), `pthread` support is required. 
+- To enable the parallel computing ability (`-t` option), `pthread` support is **required**.
+
+- The `C++11` featured compiler could be found [here](https://en.cppreference.com/w/cpp/compiler_support).
   
 - Install `dev`/`devel` version of GSL. For example:
 
@@ -58,7 +60,7 @@ tar vxf metilene-0.1-win64-rtools42.tar.gz
 
 ### INSTALL
 
-Currently, users could use the dev-version, i.e. compile the source to use this tool:
+Currently, users could use the development version, i.e. compile `pmat` from source after the `pre-install` procedure:
 
 ```bash
 git clone https://github.com/yfyang86/pmat
@@ -66,10 +68,13 @@ cd ./pmat/proc/
 make
 ```
 
-Tested Platform: 
-- X86/64(Linux/MAC OSX);
-- ARM(MAC M1/ARM 64);
-- LoongArch(龙芯3A5000, UOS).
+
+**NOTE**: Tested Platform: 
+- [x] X86/64(Linux/MAC OSX/Windows);
+- [x] ARM(MAC M1-ARM64/Linux-ARMv7/ARMv8);
+- [x] MIPS/LoongArch(龙芯3A5000, UOS).
+
+**NOTE**: Binary release for Mac/Windows/Linux(Ubuntu 18.04) users is also [available](https://github.com/yfyang86/pmat/releases). But due to the library/platform dependencies/limitations, some function may not work as designed (eg, parallel computing on Mac OSX). Please contact the maintainer or raise an [issue](https://github.com/yfyang86/pmat/issues)  if you encounter such problems.
 
 ### Test
 
