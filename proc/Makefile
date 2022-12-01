@@ -35,7 +35,8 @@ clean:
 	rm -f test.mr.DMR
 
 test1: 
-	./metilene -t 2 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/salt.test.dat > test.dat.DMR
+	./metilene -t 32 -a A -b B -X 104 -Y 104 -m 5 -d 0.01 ../examples/salt.test.dat > test.mr.DMR
+
 
 test: test1
 
