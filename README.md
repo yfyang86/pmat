@@ -12,7 +12,8 @@ C/C++ version could be found in `./proc/` folder.
 
 1. **Abilities**
  - `pmat` utilizes a totally different loss-function to tackle the non-order problem in `twin` data, which fails to distinguish `Effect 1 - Effect 2` versus `Effect 2 - Effect 1`;
- - `pmat` provides several optimization routines with different initial value schemes to solve the corresponding MLE to balance the computation accuracy, speed and scalbility (EM / BFGS).
+ - `pmat` provides several optimization routines with different initial value schemes to solve the corresponding MLE to balance the computation accuracy, speed and scalbility (EM / BFGS);
+ - 'pmat' detects differentially methylated regions between unordered pairs.
 
 2. **Transferability and Extendibility**
  - `pmat` shares the same options as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/) .
@@ -82,7 +83,7 @@ Modify the input file path `../examples/salt.test.dat` in  `test` proc of the [M
 
 ```
 test1: 
-	./metilene -t 32 -a A -b B -X 104 -Y 104 -m 5 -d 0.01 ../examples/salt.test.dat > test.mr.DMR
+	./metilene -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 ```
 
 And run:
@@ -100,7 +101,7 @@ The parameters are the same as [metilene](https://www.bioinf.uni-leipzig.de/Soft
 ```bash
 INPUT_FILE="your_input_file_path"
 OUTPUT_FILE="output_file_path" 
-./metilene -t 32 -a A -b B -X 104 -Y 104 -m 5 -d "$INPUT_FILE" > "$OUTPUT_FILE"
+./metilene -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05  "$INPUT_FILE" > "$OUTPUT_FILE"
 ```
 
 Here `INPUT_FILE` are the input file. The format should be a TAB separated file:
