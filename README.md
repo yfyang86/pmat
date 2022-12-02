@@ -96,7 +96,7 @@ make test
 
 # Usage and Examples
 
-The parameters are the same as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used; `-a A` represents to one group named `A`; `-b B` represents to the other group named `B`; `-X 8` means more than 8 of non-missing values for estimating missing values in group A; `-Y 8` means more than 8 of non-missing values for estimating missing values in group B; `-m 5` means more than 5 CpGs is requared in a DMR.
+The parameters are the same as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used; `-a A` represents to one group named `A`; `-b B` represents to the other group named `B`; `-X 8` means more than 8 non-missing values are required to estimate missing values in group A; `-Y 8` means more than 8 non-missing values are required to estimate missing values in group B; `-m 5` means more than 5 CpGs are requared in a DMR.
 A typical example is:
 
 ```bash
