@@ -161,7 +161,7 @@ chr1	136912	137169	1	0.183106	11	0.33916	0.88037	0.62192	0.65789
 Run the following command to add column names and FDR value via BH method.
 
 ```
-echo -e "chr\tstart\tstop\tq-value\tmethyl.diff\tCpGs\tpFN\tp2DKS\tpre\tpost\tpFN.fdr" > test.mr.DMR.fdr
+echo -e "chr\tstart\tstop\tq-value\tabs.methyl.diff\tCpGs\tpFN\tp2DKS\tpre\tpost\tpFN.fdr" > test.mr.DMR.fdr
 num_lines.pl test.mr.DMR > o
 pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >> test.mr.DMR.fdr
 ```
