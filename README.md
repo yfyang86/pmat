@@ -53,8 +53,8 @@ yum install libgsl-devel
 # to where you download pmat
 cd pmat
 cd ./release/Win64
-tar vxf metilene-0.1-win64-rtools42.tar.gz
-./metilene --help
+tar vxf PMAT-0.1-win64-rtools42.tar.gz
+./PMAT --help
 ```
 
 > **Note**: For MAC OS user, `Home brew` is recommended to install GSL with `brew install gsl` and properly tune the thread numbers. Otherwise, one should compile the GSL from the source and run `pmat` with `-t 1` option. 
@@ -83,7 +83,7 @@ Modify the input file path `../examples/test.dat` in  `test` proc of the [Makefi
 
 ```
 test1: 
-	./metilene -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
+	./PMAT -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 ```
 
 And run:
@@ -96,12 +96,12 @@ make test
 
 # Usage and Examples
 
-The parameters are the same as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used. A typical example is:
+The parameters are the same as [metilene](https://www.bioinf.uni-leipzig.de/Software/metilene/). For example, `-t 32` means 32 threads are used; `-a A` represents to one group named 'A'; `-b B` represents to the other group named 'B'; `-X 8` means CpG sites satisfying more than 8 observations A typical example is:
 
 ```bash
 INPUT_FILE="your_input_file_path"
 OUTPUT_FILE="output_file_path" 
-./metilene -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05  "$INPUT_FILE" > "$OUTPUT_FILE"
+./PMAT -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05  "$INPUT_FILE" > "$OUTPUT_FILE"
 ```
 
 Here `INPUT_FILE` are the input file. The format should be a TAB separated file:
@@ -121,6 +121,9 @@ chr1	10497	0.346938775510204	0.369565217391304	0.362162162162162	0.3227272727272
 chr1	10525	0.92	0.9375	0.940540540540541	0.969298245614035	1	0.972972972972973	0.984615384615385	0.956989247311828	0.963414634146341	0.958333333333333	1	0.958333333333333	0.987012987012987	0.945945945945946	0.944	0.9375	0.975409836065574	0.933884297520661	0.978021978021978	0.975903614457831
 chr1	10542	0.96	0.90625	0.978378378378378	0.969298245614035	0.882352941176471	0.945945945945946	0.96875	0.978494623655914	0.963414634146341	0.96875	0.941176470588235	0.957894736842105	0.922077922077922	0.959459459459459	0.96	0.958762886597938	0.959016393442623	0.983471074380165	0.934065934065934	0.951807228915663
 ```
+
+
+#
 
 **TODO**
 **TODO**
