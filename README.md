@@ -114,7 +114,7 @@ Here `INPUT_FILE` are the input file. The format should be a TAB separated file:
 | A | double | Example: 0.346938775510204 |
 | B | double | Example: 0.369565217391304 |
 
-Here `A` and `B` appear in pair. If there are 10 groups, then there should be 10 (`A` and `B`) pairs, i.e. 10 columns. The file should be (first three lines):
+Here `A` and `B` appear in pair. If there are 10 groups, then there should be 10 (`A` and `B`) pairs. The file should be (first three lines):
 
 ```
 chr	pos	A	B	A	B	A	B	A	B	A	B	A	B	A	B	A	B	A	B	A	B
