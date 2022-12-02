@@ -1,4 +1,4 @@
-# pmat
+# PMAT
 PMAT detects the differentially methylated regions (DMRs) for unordered pairs.
 
 | Contents | Logs |
