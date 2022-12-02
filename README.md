@@ -124,6 +124,41 @@ chr1	10542	0.96	0.90625	0.978378378378378	0.969298245614035	0.882352941176471	0.
 ```
 
 
+Run the test code in linux
+
+```
+	./PMAT -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
+```
+Or use the binary release. The top 10 lines in the output file are:
+
+```
+chr1	12505	12679	1	0.108321	7	0.0034718	0.90758	0.83462	0.80487
+chr1	661864	661928	1	0.066676	5	0.0016	0.65065	0.75823	0.79141
+chr1	662608	662692	1	0.113871	5	0.28328	0.79049	0.70271	0.73315
+chr1	715040	715121	1	0.214549	5	0.46519	0.17554	0.56345	0.69286
+chr1	545153	545215	1	0.362152	5	0.032756	0.048372	0.59842	0.76797
+chr1	713375	713449	1	0.083285	5	0.46782	0.79534	0.68649	0.72001
+chr1	842293	842431	1	0.242725	5	0.41702	0.72288	0.27554	0.32715
+chr1	136631	136718	1	0.140452	6	0.014309	0.28271	0.85088	0.83067
+chr1	136814	136876	1	0.121317	5	0.45345	0.12209	0.87179	0.82835
+chr1	136912	137169	1	0.183106	11	0.33916	0.88037	0.62192	0.65789
+```
+
+| Column| Comment | Example |
+|:--------|:--------|:--------|
+| 1 | chromosome | Example: chr1 |
+| 2| start  | Example: 10497 |
+| 3 | end | Example: 12679 |
+| 4 | q-value | Example: 1 |
+| 5 | avarge absolute 5mC difference between pairs| Example: 0.108321 |
+| 6| #CpGs in a region | Example: 7 |
+| 7 | p-value via FN-C test or FN test | Example: 0.0034718 |
+| 8 | p-value via 2d KS test | Example: 0.90758 |
+| 9 | average 5mC in one group| Example: 0.83462 |
+| 10 | average 5mC in the other group | Example: 0.80487 |
+
+
+
 #
 
 **TODO**
