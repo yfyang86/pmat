@@ -79,7 +79,7 @@ make
 
 ### Test
 
-Modify the input file path `../examples/salt.test.dat` in  `test` proc of the [Makefile](./proc/Makefile) to match your settings:
+Modify the input file path `../examples/test.dat` in  `test` proc of the [Makefile](./proc/Makefile) to match your settings:
 
 ```
 test1: 
