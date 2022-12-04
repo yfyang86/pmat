@@ -16,7 +16,7 @@ $$LRT \sim (1-EP) x_0 + EP x_1,$$ where EP is estimated using $$(EP) = 0.6010577
 
 Specially, PMAT-C with EP =0.5 is PMAT.
 
-**NOTE:** Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file (the leading 4 entries in the `samParam` array):
+**NOTE**: Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file (the leading 4 entries in the `samParam` array):
 ```cpp
 double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
     bool useBartlette = true;
@@ -172,7 +172,7 @@ The following table explains the columns in output file.
 | 3 | end | Example: 12679 |
 | 4 | q-value | Example: 1 |
 | 5 | avarge absolute 5mC difference between pairs| Example: 0.108321 |
-| 6| #CpGs in a region | Example: 7 |
+| 6 | #CpGs in a region | Example: 7 |
 | 7 | p-value via FN-C test or FN test | Example: 0.0034718 |
 | 8 | p-value via 2d KS test | Example: 0.90758 |
 | 9 | average 5mC in one group| Example: 0.83462 |
@@ -190,7 +190,7 @@ pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >
 ## License
 
 C/C++ version (in the `./proc` folder):
-- `mm2.h`, `mm2.cpp`： Apache-2.0
+- `mm2.h`, `mm2.cpp`, `utils.h`, `utils.cpp`： Apache-2.0
 - Others： GPL v2.0
 
 ## Change logs:
