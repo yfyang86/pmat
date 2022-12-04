@@ -5,7 +5,6 @@ Pairwise methylation assocation test (PMAT) is a computational tool tailored for
 
 
 
-
 | Contents | Logs |
 |:---------|:-----|
 | Date | 2022-11-22 | 
