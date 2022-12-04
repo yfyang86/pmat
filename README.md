@@ -9,12 +9,12 @@ Pairwise methylation assocation test (PMAT) is a computational tool tailored for
 
 In PMAT with FN test, the asymptotic distribution of a likelihood ratio statistic under the null hypothesis is a mixture of chi-squared distribution. That is
 
-$$LRT \sim 0.5 x_0 + 0.5 x_1.$$
+$$LRT \sim 0.5 \chi_0^2 + 0.5 \chi_1^2.$$
 
-In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion (EP) is : 
-$$LRT \sim (1-EP) x_0 + EP x_1,$$ where EP is estimated using $$(EP) = 0.60105772-4.0224 n^{(-0.89)}.$$
+In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion $\hat{EP}$ is : 
+$$LRT \sim (1-\hat{EP}) \chi_0^2 + \hat{EP} \chi_1^2,$$ where $\hat{EP}$ is estimated using $$\hat{EP} = 0.60105772-4.0224 n^{(-0.89)}.$$
 
-Specially, PMAT-C with EP =0.5 is PMAT.
+Specially, PMAT-C with $\hat{EP} =0.5$ leads to PMAT. Thus, our tool provides PMAT-C in default.
 
 **NOTE**: Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file (the leading 4 entries in the `samParam` array):
 ```cpp
@@ -25,7 +25,18 @@ double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, do
 	...
 }
 ```
-Users could change the parameter and re-compile to get the corresponding pmat-c.
+Users could change the parameter and re-compile to get the corresponding PMAT-C. Similarly, users could get PMAT under the parameter setting:
+```cpp
+double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
+    bool useBartlette = true;
+    // config.txt
+    double samParam[6]={0.5, 0., 0, 0, 1., 1.};
+	...
+}
+```
+
+
+
 
 ## C/C++ program
 
@@ -152,40 +163,48 @@ Run the test code in linux
 Or use the binary release. The top 10 lines in the output file are:
 
 ```
-chr1	12505	12679	1	0.108321	7	0.0034718	0.90758	0.83462	0.80487
-chr1	661864	661928	1	0.066676	5	0.0016	0.65065	0.75823	0.79141
-chr1	662608	662692	1	0.113871	5	0.28328	0.79049	0.70271	0.73315
-chr1	715040	715121	1	0.214549	5	0.46519	0.17554	0.56345	0.69286
-chr1	545153	545215	1	0.362152	5	0.032756	0.048372	0.59842	0.76797
-chr1	713375	713449	1	0.083285	5	0.46782	0.79534	0.68649	0.72001
-chr1	842293	842431	1	0.242725	5	0.41702	0.72288	0.27554	0.32715
-chr1	136631	136718	1	0.140452	6	0.014309	0.28271	0.85088	0.83067
-chr1	136814	136876	1	0.121317	5	0.45345	0.12209	0.87179	0.82835
-chr1	136912	137169	1	0.183106	11	0.33916	0.88037	0.62192	0.65789
+chr1    661864  661928  0.066676        5       0.0021516       0.75823 0.79141
+chr1    662608  662692  0.113871        5       0.33195 0.70271 0.73315
+chr1    713375  713453  0.091691        6       0.5     0.67901 0.69787
+chr1    842293  842431  0.242725        5       0.5     0.27554 0.32715
+chr1    12505   12754   0.119788        8       0.00046499      0.83472 0.81572
+chr1    545078  545215  0.371799        11      0.0082285       0.60262 0.71239
+chr1    854528  854739  0.159495        5       0.00016186      0.75215 0.67748
+chr1    837884  838368  0.106765        14      0.12877 0.84016 0.81546
+chr1    848507  848646  0.076560        5       0.5     0.67124 0.65959
+chr1    136631  136718  0.140452        6       0.015472        0.85088 0.83067
 ```
 The following table explains the columns in output file.
 
 | Column| Comment | Example |
 |:--------|:--------|:--------|
 | 1 | chromosome | Example: chr1 |
-| 2| start  | Example: 10497 |
-| 3 | end | Example: 12679 |
-| 4 | q-value | Example: 1 |
-| 5 | avarge absolute 5mC difference between pairs| Example: 0.108321 |
-| 6 | #CpGs in a region | Example: 7 |
-| 7 | p-value via FN-C test or FN test | Example: 0.0034718 |
-| 8 | p-value via 2d KS test | Example: 0.90758 |
-| 9 | average 5mC in one group| Example: 0.83462 |
-| 10 | average 5mC in the other group | Example: 0.80487 |
+| 2| start  | Example: 661864 |
+| 3 | end | Example: 661928 |
+| 4 | avarge absolute 5mC difference between pairs| Example: 0.066676 |
+| 5| #CpGs in a region | Example: 5 |
+| 6 | p-value via FN-C test or FN test | Example: 0.0021516 |
+| 7 | average 5mC in one group| Example: 0.75823 |
+| 8 | average 5mC in the other group | Example: 0.79141 |
 
 
 Run the following command to add column names and FDR value via BH method. (Perl script is available upon request.)
 
 ```bash
-echo -e "chr\tstart\tstop\tq-value\tabs.methyl.diff\tCpGs\tpFN\tp2DKS\tpre\tpost\tpFN.fdr" > test.mr.DMR.fdr
+echo -e "chr\tstart\tstop\tabs.methyl.diff\tCpGs\tpFN\t5mC.A\t5mC.B" > test.mr.DMR.fdr
 num_lines.pl test.mr.DMR > o
 pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >> test.mr.DMR.fdr
 ```
+
+Alternatively, readers can add column names and FDR values via BH method using the following R script.
+```R
+data <- read.table("test.mr.DMR", header = F)
+colnames(data) <- c("chr", "start", "stop", "abs.methyl.diff", "CpGs", "pFN", "5mC.A", "5mC.B")
+data$FDR <- p.adjust(data$pFN, method = "BH")
+write.table(data, "test.mr.DMR.fdr", row.names= F, sep = "\t", quote = F)
+```
+
+
 
 ## License
 
@@ -208,6 +227,3 @@ C/C++ version (in the `./proc` folder):
   - [ ] `Config.txt` support without re-compile. 
 - [x] Adjusted p-value support : In the comming Version
 
-## Wishing List
-
-- [ ] [Simulation Demos](./TODO.md): 
