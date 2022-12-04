@@ -4,6 +4,22 @@ Pairwise methylation assocation test (PMAT) is a computational tool tailored for
 
 
 
+In PMAT with FN test, the asymptotic distribution of a likelihood ratio statistic under the null hypothesis is a mixture of chi-squared distribution. That is
+
+LRT ~ 0.5 x0 + 0.5 x1.
+
+
+
+In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion (EP) is : 
+LRT~ (1-EP) x0+EP x1, where EP is estimated using (EP) ̂= 0.60105772-4.0224n^(-0.89).
+
+
+The parameters are in `config.txt' file. Specially, PMAT-C with EP =0.5 is PMAT.
+
+
+
+
+
 
 | Contents | Logs |
 |:---------|:-----|
