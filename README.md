@@ -16,7 +16,7 @@ $$LRT \sim (1-EP) x_0 + EP x_1,$$ where EP is estimated using $$(EP) = 0.6010577
 
 Specially, PMAT-C with EP =0.5 is PMAT.
 
-**NOTE:** Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file:
+**NOTE:** Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file (the leading 4 entries in the `samParam` array):
 ```cpp
 double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
     bool useBartlette = true;
