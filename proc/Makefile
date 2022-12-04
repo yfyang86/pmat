@@ -25,9 +25,9 @@
 	src/metseg.o
 	
 
-all: metilene 
+all: pmat 
 
-metilene: ${METSEGOBJ}
+pmat: ${METSEGOBJ}
 	${CXX} $(CXXFLAGS) ${METSEGOBJ} -o pmat $(LDFLAGS)
 
 clean:

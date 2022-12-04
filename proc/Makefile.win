@@ -25,17 +25,17 @@
 	src/metseg.o
 	
 
-all: metilene 
+all: metpmatilene 
 
-metilene: ${METSEGOBJ}
-	${CXX} $(CXXFLAGS) ${METSEGOBJ} -o metilene $(LDFLAGS)
+pmat: ${METSEGOBJ}
+	${CXX} $(CXXFLAGS) ${METSEGOBJ} -o pmat $(LDFLAGS)
 
 clean:
-	rm -rf src/*.o metilene
+	rm -rf src/*.o pmat
 	rm -f test.mr.DMR
 
 test1: 
-	./metilene -t 2 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/salt.test.dat > salt.test.dat.DMR
+	./pmat -t 2 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.dat.DMR
 
 test: test1
 
