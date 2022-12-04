@@ -216,6 +216,3 @@ C/C++ version (in the `./proc` folder):
   - [ ] `Config.txt` support without re-compile. 
 - [x] Adjusted p-value support : In the comming Version
 
-## Wishing List
-
-- [ ] [Simulation Demos](./TODO.md): 
