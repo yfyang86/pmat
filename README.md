@@ -25,7 +25,7 @@ double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, do
 	...
 }
 ```
-Users could change the parameter and re-compile to get the corresponding PMAT-C. Similarly, users could get PMAT under the parameter setting
+Users could change the parameter and re-compile to get the corresponding PMAT-C. Similarly, users could get PMAT under the parameter setting:
 ```cpp
 double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
     bool useBartlette = true;
