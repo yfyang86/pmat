@@ -54,7 +54,7 @@ yum install libgsl-devel
 cd pmat
 cd ./release/Win64
 tar vxf PMAT-0.1-win64-rtools42.tar.gz
-./PMAT --help
+./pmat --help
 ```
 
 > **Note**: For MAC OS user, `Home brew` is recommended to install GSL with `brew install gsl` and properly tune the thread numbers. Otherwise, one should compile the GSL from the source and run `pmat` with `-t 1` option. 
@@ -83,7 +83,7 @@ Modify the input file path `../examples/test.dat` in  `test` proc of the [Makefi
 
 ```
 test1: 
-	./PMAT -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
+	./pmat -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 ```
 
 And run:
@@ -102,7 +102,7 @@ A typical example is:
 ```bash
 INPUT_FILE="your_input_file_path"
 OUTPUT_FILE="output_file_path" 
-./PMAT -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05  "$INPUT_FILE" > "$OUTPUT_FILE"
+./pmat -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05  "$INPUT_FILE" > "$OUTPUT_FILE"
 ```
 
 Here `INPUT_FILE` are the input file. The format should be a TAB separated file:
@@ -127,7 +127,7 @@ chr1	10542	0.96	0.90625	0.978378378378378	0.969298245614035	0.882352941176471	0.
 Run the test code in linux
 
 ```
-	./PMAT -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
+	./pmat -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 ```
 Or use the binary release. The top 10 lines in the output file are:
 
@@ -167,12 +167,6 @@ num_lines.pl test.mr.DMR > o
 pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >> test.mr.DMR.fdr
 ```
 
-#
-
-**TODO**
-**TODO**
-**TODO**
-
 ## License
 
 C/C++ version (in the `./proc` folder):
@@ -189,7 +183,8 @@ C/C++ version (in the `./proc` folder):
 - [ ] 2022-11: Example/Simulation
 	- [x] Simple demo
 	- [ ] Full example (in plan)
-
+- [ ] Config file support: In the comming Version
+- [ ] Adjusted p-value support : In the comming Version
 
 ## Wishing List
 
