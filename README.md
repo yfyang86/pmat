@@ -12,17 +12,20 @@ In PMAT with FN test, the asymptotic distribution of a likelihood ratio statisti
 $$LRT \sim 0.5 x_0 + 0.5 x_1.$$
 
 In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion (EP) is : 
-$$LRT \sim (1-EP) x_0 + EP x_1,$$ where EP is estimated using $$(EP) = 0.60105772-4.0224 n^{(-0.89)}$$.
+$$LRT \sim (1-EP) x_0 + EP x_1,$$ where EP is estimated using $$(EP) = 0.60105772-4.0224 n^{(-0.89)}.$$
 
+Specially, PMAT-C with EP =0.5 is PMAT.
 
-The parameters are in `./proc/config.txt` file. Specially, PMAT-C with EP =0.5 is PMAT. By default, the parameters in `./proc/config.txt` file are:
-
+**NOTE:** Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file:
+```cpp
+double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
+    bool useBartlette = true;
+    // config.txt
+    double samParam[6]={0.60105772, 0., -4.0224, 0.89, 1., 1.};
+	...
+}
 ```
-a: 0.6132
-b: 0
-c: 4.0224
-d: -0.89
-```
+Users could change the parameter and re-compile to get the corresponding pmat-c.
 
 ## C/C++ program
 
@@ -200,8 +203,9 @@ C/C++ version (in the `./proc` folder):
 - [ ] 2022-11: Example/Simulation
 	- [x] Simple demo
 	- [ ] Full example (in plan)
-- [x] Config file support: In the comming Version
-  - [ ] Documentation and Examples.
+- [ ] Config file support for the Bartlett correction : In the comming Version
+  - [x] Documentation and Examples.
+  - [ ] `Config.txt` support without re-compile. 
 - [x] Adjusted p-value support : In the comming Version
 
 ## Wishing List
