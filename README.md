@@ -14,7 +14,7 @@ $$LRT \sim 0.5 \chi_0^2 + 0.5 \chi_1^2.$$
 In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion $\hat{EP}$ is : 
 $$LRT \sim (1-\hat{EP}) \chi_0^2 + \hat{EP} \chi_1^2,$$ where $\hat{EP}$ is estimated using $$\hat{EP} = 0.60105772-4.0224 n^{(-0.89)}.$$
 
-Specially, PMAT-C with $\hat{EP} =0.5$ is PMAT.
+Specially, PMAT-C with $\hat{EP} =0.5$ leads to PMAT.
 
 **NOTE:** Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file (the leading 4 entries in the `samParam` array):
 ```cpp
