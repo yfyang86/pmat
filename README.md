@@ -14,7 +14,7 @@ $$LRT \sim 0.5 \chi_0^2 + 0.5 \chi_1^2.$$
 In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion $\hat{EP}$ is : 
 $$LRT \sim (1-\hat{EP}) \chi_0^2 + \hat{EP} \chi_1^2,$$ where $\hat{EP}$ is estimated using $$\hat{EP} = 0.60105772-4.0224 n^{(-0.89)}.$$
 
-Specially, PMAT-C with $\hat{EP} =0.5$ leads to PMAT.
+Specially, PMAT-C with $\hat{EP} =0.5$ leads to PMAT. Thus, our tool provides PMAT-C in default.
 
 **NOTE:** Currently, all the parameters are hard coded in the `./proc/src/mathematics.cpp` file (the leading 4 entries in the `samParam` array):
 ```cpp
@@ -25,7 +25,18 @@ double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, do
 	...
 }
 ```
-Users could change the parameter and re-compile to get the corresponding pmat-c.
+Users could change the parameter and re-compile to get the corresponding PMAT-C. Similarly, users could get PMAT under the parameter setting:
+```cpp
+double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
+    bool useBartlette = true;
+    // config.txt
+    double samParam[6]={0.5, 0., 0, 0, 1., 1.};
+	...
+}
+```
+
+
+
 
 ## C/C++ program
 
