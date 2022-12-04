@@ -859,8 +859,8 @@ double foldednomal(double *a, int m, double *b, int n ){
 double foldednomalpvalue(double *a, int m, double *b, int n, bool logit=true, double logittuning=0.00001, bool nonZero = true){
     bool useBartlette = true;
     // config.txt
-    //double samParam[6]={0.60105772, 0., -4.0224, 0.89, 1., 1.};
-    double samParam[6]={0.5, 0., 0, 0., 1., 1.};
+    double samParam[6]={0.60105772, 0., -4.0224, 0.89, 1., 1.};
+    //double samParam[6]={0.5, 0., 0, 0., 1., 1.};
 
     if (m != n)
     {

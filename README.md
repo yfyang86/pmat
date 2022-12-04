@@ -1,30 +1,28 @@
 # PMAT
 
+| Contents | Logs |
+|:---------|:-----|
+| Date | 2022-12-04 | 
+| Version | v-0.2 |
+
 Pairwise methylation assocation test (PMAT) is a computational tool tailored for identifying DMRs between unordered pairs like twins. In this tool, absolute methylation difference between unorderd pairs was maximized in DMRs identification. A folded normal (FN) test based on the framework of likelihood ratio test was proposed recently and implemented to test the methylation difference between unordered pairs in each methylation region.  In order to improve the approximation precision of a FN test when sample size is not large enough, we further established PMAT with Bartlett correction (PMAT-C). In PMAT-C, a folded normal test with Bartlett correction (FN-C) was implemented to test the methylation differences between unordered pairs.
-
-
 
 In PMAT with FN test, the asymptotic distribution of a likelihood ratio statistic under the null hypothesis is a mixture of chi-squared distribution. That is
 
-LRT ~ 0.5 x0 + 0.5 x1.
-
-
+$$LRT \sim 0.5 x_0 + 0.5 x_1.$$
 
 In PMAT-C with FN-C test, the mixture proportion of asymptotic distribution with an empirical proportion (EP) is : 
-LRT~ (1-EP) x0+EP x1, where EP is estimated using (EP) ̂= 0.60105772-4.0224n^(-0.89).
+$$LRT \sim (1-EP) x_0 + EP x_1,$$ where EP is estimated using $$(EP) = 0.60105772-4.0224 n^{(-0.89)}$$.
 
 
-The parameters are in `config.txt' file. Specially, PMAT-C with EP =0.5 is PMAT.
+The parameters are in `./proc/config.txt` file. Specially, PMAT-C with EP =0.5 is PMAT. By default, the parameters in `./proc/config.txt` file are:
 
-
-
-
-
-
-| Contents | Logs |
-|:---------|:-----|
-| Date | 2022-11-22 | 
-| Version | v-0.1 |
+```
+a: 0.6132
+b: 0
+c: 4.0224
+d: -0.89
+```
 
 ## C/C++ program
 
@@ -61,7 +59,7 @@ Libraries: GSL-2.x
 
 ```bash
 # debian/ubuntu 
-apt-install libgsl-dev
+apt install libgsl-dev
 # Centos/RH
 yum install libgsl-devel
 ```
@@ -74,7 +72,6 @@ yum install libgsl-devel
 cd pmat
 cd ./release/Win64
 tar vxf PMAT-0.1-win64-rtools42.tar.gz
-./pmat --help
 ```
 
 > **Note**: For MAC OS user, `Home brew` is recommended to install GSL with `brew install gsl` and properly tune the thread numbers. Otherwise, one should compile the GSL from the source and run `pmat` with `-t 1` option. 
@@ -95,7 +92,7 @@ make
 - [x] ARM(MAC M1-ARM64/Linux-ARMv7/ARMv8);
 - [x] MIPS/LoongArch(龙芯3A5000, UOS).
 
-**NOTE**: Binary release for Mac/Windows/Linux(Ubuntu 18.04) users is also [available](https://github.com/yfyang86/pmat/releases). But due to the library/platform dependencies/limitations, some function may not work as designed (eg, parallel computing on Mac OSX). Please contact the maintainer or raise an [issue](https://github.com/yfyang86/pmat/issues)  if you encounter such problems.
+**NOTE**: Binary release for Mac/Windows/Linux(Ubuntu 18.04) users is also [available](https://github.com/yfyang86/pmat/releases). But due to the library/platform dependencies/limitations, some function may not work as designed (eg, parallel computing on Mac OSX). Please contact the maintainer or raise an [issue](https://github.com/yfyang86/pmat/issues)  if you encounter such problems. Currently, only V0.0.1 is available.
 
 ### Test
 
@@ -146,8 +143,8 @@ chr1	10542	0.96	0.90625	0.978378378378378	0.969298245614035	0.882352941176471	0.
 
 Run the test code in linux
 
-```
-	./pmat -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
+```bash
+./pmat -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 ```
 Or use the binary release. The top 10 lines in the output file are:
 
@@ -179,9 +176,9 @@ The following table explains the columns in output file.
 | 10 | average 5mC in the other group | Example: 0.80487 |
 
 
-Run the following command to add column names and FDR value via BH method.
+Run the following command to add column names and FDR value via BH method. (Perl script is available upon request.)
 
-```
+```bash
 echo -e "chr\tstart\tstop\tq-value\tabs.methyl.diff\tCpGs\tpFN\tp2DKS\tpre\tpost\tpFN.fdr" > test.mr.DMR.fdr
 num_lines.pl test.mr.DMR > o
 pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >> test.mr.DMR.fdr
@@ -203,8 +200,9 @@ C/C++ version (in the `./proc` folder):
 - [ ] 2022-11: Example/Simulation
 	- [x] Simple demo
 	- [ ] Full example (in plan)
-- [ ] Config file support: In the comming Version
-- [ ] Adjusted p-value support : In the comming Version
+- [x] Config file support: In the comming Version
+  - [ ] Documentation and Examples.
+- [x] Adjusted p-value support : In the comming Version
 
 ## Wishing List
 
