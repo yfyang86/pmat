@@ -2628,27 +2628,26 @@ int main(int argc, char** argv) {
 
   //wait for all threads to terminate
   while(idle != nfo.threads);
-
-  if(nfo.mode == 1 || nfo.mode == 2) {
+  
+  // PMAT only handles nfo.mode == 1
+  //if(nfo.mode == 1 || nfo.mode == 2) {
     fprintf(stderr, "Number of Tests: %d\n", nfo.outputList->numberTests);
-    multiple_testing_correction(nfo.outputList, nfo.mode, nfo.mtc);
+    multiple_testing_correction(nfo.outputList, 1, nfo.mtc);
     for(int i=0;i<nfo.outputList->i;i++){
       if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
-        fprintf(stdout, "%s\t%d\t%d\t%.5g\t%f\t%d\t%.5g\t%.5g\t%.5g\t%.5g\n",
+        fprintf(stdout, "%s\t%d\t%d\t%f\t%d\t%.5g\t%.5g\t%.5g\n",
                 nfo.outputList->segment_out_st[i].chr,
                 nfo.outputList->segment_out_st[i].start,
                 nfo.outputList->segment_out_st[i].stop,
-                nfo.outputList->segment_out_st[i].q,
                 nfo.outputList->segment_out_st[i].meandiff,
                 nfo.outputList->segment_out_st[i].length,
                 nfo.outputList->segment_out_st[i].mwu,
-                nfo.outputList->segment_out_st[i].p,
                 nfo.outputList->segment_out_st[i].methA,
                 nfo.outputList->segment_out_st[i].methB);
         }
     }
-  }
-
+  //}
+  /*
   if(nfo.mode == 3) {
     fprintf(stderr, "Number of Tests: %d\n", nfo.outputList->numberTests);
     multiple_testing_correction(nfo.outputList, nfo.mode, nfo.mtc);
@@ -2668,6 +2667,7 @@ int main(int argc, char** argv) {
         }
     }
   }
+  */
 
   fflush(stdout);
 

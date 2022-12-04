@@ -13,3 +13,5 @@ Thumbs.db
 
 ./simulation
 simulation/*
+
+.vscode
