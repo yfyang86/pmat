@@ -1,8 +1,6 @@
 # PMAT
 
-Pairwise methylation assocation test (PMAT) is a computational tool tailored for identifying DMRs between unordered pairs like twins. 
-In this tool, absolute methylation difference between unorderd pairs was maximized in DMRs identification. A folded normal (FN) test based on the framework of likelihood ratio test was proposed recently and implemented to test the methylation difference between unordered pairs in each methylation region.  
-In order to improve the approximation precision of a FN test when sample size is not large enough, we further established PMAT with Bartlett correction (PMAT-C). In PMAT-C, a folded normal test with Bartlett correction (FN-C) was implemented to test the methylation differences between unordered pairs.
+Pairwise methylation assocation test (PMAT) is a computational tool tailored for identifying DMRs between unordered pairs like twins. In this tool, absolute methylation difference between unorderd pairs was maximized in DMRs identification. A folded normal (FN) test based on the framework of likelihood ratio test was proposed recently and implemented to test the methylation difference between unordered pairs in each methylation region.  In order to improve the approximation precision of a FN test when sample size is not large enough, we further established PMAT with Bartlett correction (PMAT-C). In PMAT-C, a folded normal test with Bartlett correction (FN-C) was implemented to test the methylation differences between unordered pairs.
 
 
 
