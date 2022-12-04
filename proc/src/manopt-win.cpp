@@ -17,7 +17,6 @@
  *
  */
 #define __WIN32__
-
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -35,6 +34,8 @@
 #include <windows.h>
 #endif
 
+
+
 char* getNiceSVNVersion(const char *version) {
   int i;
   //char *p, *src, *subs[] = {"$Rev: ","$Date: ", " $"};
@@ -51,8 +52,7 @@ char* getNiceSVNVersion(const char *version) {
   return src;
 }
 
-int
-detectTerminalwidth(void) {
+int detectTerminalwidth(void) {
 #ifndef __WIN32__
   struct winsize termwinsize;
   ioctl(0,TIOCGWINSZ, &termwinsize);
@@ -67,8 +67,8 @@ detectTerminalwidth(void) {
 #endif
 }
 
-unsigned char
-isfloat(char *s) {
+
+unsigned char isfloat(char *s) {
   int i=0;
   int len=strlen(s);
   unsigned char dpt = 0;
@@ -79,8 +79,7 @@ isfloat(char *s) {
   return (len==i);
 }
 
-unsigned char
-isint(char *s) {
+unsigned char isint(char *s) {
   int i=0;
   int len=strlen(s);
   i += (s[i] == 43 || s[i] == 45) ? 1 : 0;
@@ -88,8 +87,7 @@ isint(char *s) {
   return (len==i);
 }
 
-void
-manopt_usage(manopt_optionset *set) {
+void manopt_usage(manopt_optionset *set) {
   unsigned int i=0,j=0,k,l,
       aptr = 0,
       msglen = 0,

@@ -25,7 +25,7 @@
 	src/metseg.o
 	
 
-all: metpmatilene 
+all: pmat 
 
 pmat: ${METSEGOBJ}
 	${CXX} $(CXXFLAGS) ${METSEGOBJ} -o pmat $(LDFLAGS)
@@ -35,7 +35,7 @@ clean:
 	rm -f test.mr.DMR
 
 test1: 
-	./pmat -t 2 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.dat.DMR
+	./pmat -t 2 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 
 test: test1
 
