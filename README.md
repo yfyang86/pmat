@@ -1,5 +1,10 @@
 # PMAT
-PMAT detects the differentially methylated regions (DMRs) for unordered pairs.
+
+Pairwise methylation assocation test (PMAT) is a computational tool tailored for identifying DMRs between twins. Identical twins were non-directional pairs in which each twin’s sibling belongs to either of the two groups being compared. Neither paired T test nor paired Wilcoxon-rank sum test was valid for non-directional pairs. Considering the absolute difference is a natural solution to compare unordered cotwins. Folded normal (FN) test based on the framework of likelihood ratio test was established to examine the absolute differences between cotwins in PMAT. In order to improve the approximation precision of a FN test when sample size is not large enough, we further established PMAT with Bartlett correction (PMAT-C). In PMAT-C, a folded normal test was implemented to test the methylation differences between unordered cotwins.
+
+
+
+
 
 | Contents | Logs |
 |:---------|:-----|
