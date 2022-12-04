@@ -180,10 +180,20 @@ The following table explains the columns in output file.
 Run the following command to add column names and FDR value via BH method. (Perl script is available upon request.)
 
 ```bash
-echo -e "chr\tstart\tstop\tq-value\tabs.methyl.diff\tCpGs\tpFN\tp2DKS\tpre\tpost\tpFN.fdr" > test.mr.DMR.fdr
+echo -e "chr\tstart\tstop\tabs.methyl.diff\tCpGs\tpFN\t5mC.A\t5mC.B" > test.mr.DMR.fdr
 num_lines.pl test.mr.DMR > o
 pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >> test.mr.DMR.fdr
 ```
+
+Alternatively, readers can add column names and FDR values via BH method using the following R script.
+```R
+data <- read.table("test.mr.DMR", header = F)
+colnames(data) <- c("chr", "start", "stop", "abs.methyl.diff", "CpGs", "pFN", "5mC.A", "5mC.B")
+data$FDR <- p.adjust(data$pFN, method = "BH")
+write.table(data, "test.mr.DMR.fdr", row.names= F, sep = "\t", quote = F)
+```
+
+
 
 ## License
 
