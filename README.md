@@ -168,13 +168,13 @@ The following table explains the columns in output file.
 | Column| Comment | Example |
 |:--------|:--------|:--------|
 | 1 | chromosome | Example: chr1 |
-| 2| start  | Example: 10497 |
-| 3 | end | Example: 12679 |
-| 4 | avarge absolute 5mC difference between pairs| Example: 0.108321 |
-| 5| #CpGs in a region | Example: 7 |
-| 6 | p-value via FN-C test or FN test | Example: 0.0034718 |
-| 7 | average 5mC in one group| Example: 0.83462 |
-| 8 | average 5mC in the other group | Example: 0.80487 |
+| 2| start  | Example: 661864 |
+| 3 | end | Example: 661928 |
+| 4 | avarge absolute 5mC difference between pairs| Example: 0.066676 |
+| 5| #CpGs in a region | Example: 5 |
+| 6 | p-value via FN-C test or FN test | Example: 0.0021516 |
+| 7 | average 5mC in one group| Example: 0.75823 |
+| 8 | average 5mC in the other group | Example: 0.79141 |
 
 
 Run the following command to add column names and FDR value via BH method. (Perl script is available upon request.)
