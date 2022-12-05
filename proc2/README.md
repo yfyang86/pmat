@@ -26,9 +26,13 @@ While `useFoldedNormal:1`, the output is:
 | 6 | p-value via FN-C test or FN test | Example: 0.0021516 |
 | 7 | average 5mC in one group| Example: 0.75823 |
 | 8 | average 5mC in the other group | Example: 0.79141 |
-| 9 | p-value adjust (BH) | Example: 0.55622667 |
+| 9 | adjusted p-value via BH(fdr) | Example: 0.55622667 |
 
 
 # Install Process
 
 It is the same as `./proc`.
+
+# Reference
+
+[BH] Benjamini, Y., and Hochberg, Y. (1995).  Controlling the false discovery rate: a practical and powerful approach to multiple testing.  _Journal of the Royal Statistical Society Series B_, *57*, 289-300.  doi: 10.1111/j.2517-6161.1995.tb02031.x (URL: https://doi.org/10.1111/j.2517-6161.1995.tb02031.x).  <URL:https://www.jstor.org/stable/2346101>.
