@@ -1,4 +1,4 @@
-# Expriment
+# Experimental
 
 - BH for p-value adjustment: `padj_bh` in [utils](./src/utils.cpp)
 - Add `config.txt`
