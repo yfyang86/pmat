@@ -19,3 +19,6 @@ simulation/*
 .proc2
 proc2
 
+.so
+.o
+
