@@ -574,38 +574,38 @@ void kstest(segment_t *seg , int a, int b, char mindiff, char mincpgs, char test
     y[i-a]/=dl2;
   }
 
-#ifdef __DEBUG_METLINE__L0__
-   printf(stdout,"pVALUE %f\n",p);
-   printf("kstest start\n");
-   printf("%lf\n",p);
-   printf("%lf\n",noA);
-   printf("%lf\n",noB);
-   printf("%lf\n",la[0]);
-   printf("%lf\n",lb[0]);
+
+   // printf(stdout,"pVALUE %f\n",p);
+   //printf("kstest start\n");
+   // printf("%lf\n",p);
+   //printf("%d\n",noA);
+   //printf("%d\n",noB);
+   // printf("%lf\n",la[0]);
+   // printf("%lf\n",lb[0]);
+   /*
    for(int i=0;i<noA;i++){
        printf("%lf\n",la[0][i]);
      }
      for(int i=0;i<noB;i++){
        printf("%lf\n",lb[0][i]);
      }
-
-   printf("kstest end\n");
-#endif
-
+  */
+  //printf("kstest end\n");
    int *nonZeroPairs = (int *) ALLOCMEMORY(NULL, NULL, int, 1);
+  double sam_param[6] = {nfo->sam_a, nfo->sam_b, nfo->sam_c, nfo->sam_d, (double) (nfo->useBartlett >0) , (double) (nfo->useFoldedNormal >0)};
+  double u = mannwhitney( la[0], l*noA, lb[0], l*noB, nonZeroPairs,  nfo->useBartlett, sam_param);
 
-  double u = mannwhitney( la[0], l*noA, lb[0], l*noB, nonZeroPairs);
-  p = mannwhitneyPvalue(u, l*noA, l*noB, nfo->MWU, MAXM, MAXN, *nonZeroPairs);
+  p = mannwhitneyPvalue(u, l*noA, l*noB, nfo->MWU, MAXM, MAXN, *nonZeroPairs, nfo->useFoldedNormal);
 
    FREEMEMORY(NULL, nonZeroPairs);
-#ifdef __DEBUG_METLINE__L0__
-   printf(stdout,"pVALUE %f\n",p);
-   printf("kstest start\n");
-   printf("%lf\n",p);
-   printf("%d\n",noA);
-   printf("%d\n",noB);
-   printf("%lf\n",la[0]);
-   printf("%lf\n",lb[0]);
+   // printf(stdout,"pVALUE %f\n",p);
+  // printf("kstest start\n");
+   // printf("%lf\n",p);
+  // printf("%d\n",noA);
+  // printf("%d\n",noB);
+   // printf("%lf\n",la[0]);
+   // printf("%lf\n",lb[0]);
+   /*
    for(int i=0;i<noA;i++){
        printf("%lf\n",la[0][i]);
      }
@@ -613,8 +613,7 @@ void kstest(segment_t *seg , int a, int b, char mindiff, char mincpgs, char test
        printf("%lf\n",lb[0][i]);
      }
   printf("kstest end\n");
-#endif
-
+*/
   mean1/=dl1*dl;
   mean2/=dl2*dl;
 
@@ -1648,8 +1647,9 @@ segworker_CpG (void *args)
 
 
   int *nonZeroPairs = (int *) ALLOCMEMORY(NULL, NULL, int, 1);
-  double ua = mannwhitney (cpg->groupA, cpg->noA, cpg->groupB, cpg->noB, nonZeroPairs);
-  double p= mannwhitneyPvalue(ua, cpg->noA, cpg->noB, t->MWU, MAXM, MAXN, *nonZeroPairs);
+  double sam_param[6] = {cpg->sam_a, cpg->sam_b, cpg->sam_c, cpg->sam_d, (double) (cpg->useBartlett >0) , (double) (cpg->useFoldedNormal >0)};
+  double ua = mannwhitney (cpg->groupA, cpg->noA, cpg->groupB, cpg->noB, nonZeroPairs, cpg->useBartlett,sam_param);
+  double p= mannwhitneyPvalue(ua, cpg->noA, cpg->noB, t->MWU, MAXM, MAXN, *nonZeroPairs, cpg->useFoldedNormal);
   FREEMEMORY(NULL, nonZeroPairs);
   //double p = mannwhitney (cpg->groupA, cpg->noA, cpg->groupB, cpg->noB);
   double ratio = get_meandiff(cpg, cpg->groupA, cpg->noA, cpg->groupB, cpg->noB);
@@ -1870,8 +1870,7 @@ fillNAN(double *values, int *grpA, int noA, int *grpB, int noB, metseg_t *nfo) {
  *
  */
 
-void
-initProgramParams (metseg_t *nfo)
+void initProgramParams (metseg_t *nfo)
 {
   //char g1[]="g1";
   //char g2[]="g2";
@@ -1892,6 +1891,15 @@ initProgramParams (metseg_t *nfo)
   nfo->MWU = generateMannWhitneyCDFMatrix(MAXM, MAXN);
   //  testMannWhitneyApprox (MAXM, MAXN, nfo->MWU);
   nfo->randomseed=26061981;
+  double sam_par[6] = {0., 0., 0., 0., 1, 1}; 
+  solver_sam_load_config(sam_par);
+  nfo->sam_a = sam_par[0];
+  nfo->sam_b = sam_par[1];
+  nfo->sam_c = sam_par[2];
+  nfo->sam_d = sam_par[3];
+  nfo->useBartlett = (sam_par[4] > 0 ? true: false);
+  nfo->useFoldedNormal = (sam_par[5] > 0?true:false);
+ 
   return ;
 }
 
@@ -1902,8 +1910,7 @@ initProgramParams (metseg_t *nfo)
  *
  */
 
-void
-initProgramParams2 (metseg_t *nfo, int noA, int noB)
+void initProgramParams2 (metseg_t *nfo, int noA, int noB)
 {
   if(nfo->minNoA<0) {
         nfo->minNoA = ceil((double)noA * nfo->minFactor);
@@ -1912,6 +1919,15 @@ initProgramParams2 (metseg_t *nfo, int noA, int noB)
   if(nfo->minNoB<0) {
         nfo->minNoB = ceil((double)noB * nfo->minFactor);
   }
+
+  double sam_par[6] = {0., 0., 0., 0., 1., 1.}; 
+  solver_sam_load_config(sam_par);
+  nfo->sam_a = sam_par[0];
+  nfo->sam_b = sam_par[1];
+  nfo->sam_c = sam_par[2];
+  nfo->sam_d = sam_par[3];
+  nfo->useBartlett = (sam_par[4] > 0 ? true: false);
+  nfo->useFoldedNormal = (sam_par[5] > 0?true:false);
 
   return ;
 }
@@ -2130,6 +2146,15 @@ int main(int argc, char** argv) {
             cpg->noB=noB;
             cpg->start=atoi(csv[0]->strings[1].str);
             cpg->stop=atoi(csv[0]->strings[1].str);
+            double sam_par[6] = {0., 0., 0., 0., 1., 1.}; 
+            solver_sam_load_config(sam_par);
+            cpg->sam_a = sam_par[0];
+            cpg->sam_b = sam_par[1];
+            cpg->sam_c = sam_par[2];
+            cpg->sam_d = sam_par[3];
+            if (sam_par[4] > 0 ) cpg->useBartlett = true;
+            if (sam_par[5] > 0 ) cpg->useFoldedNormal = true;
+
 
             if(nfo.threads > 1) {
                 //wait for a free thread
@@ -2160,9 +2185,9 @@ int main(int argc, char** argv) {
 
               } else {
                 fprintf(stderr, "CpG testing %s-[%d]\n", cpg->chr, cpg->start);
-               int *nonZeroPairs = (int *) ALLOCMEMORY(NULL, NULL, int, 1);
-                double ua = mannwhitney (cpg->groupA, noA, cpg->groupB, noB, nonZeroPairs);
-		            double p= mannwhitneyPvalue(ua, noA, noB, nfo.MWU, MAXM, MAXN, *nonZeroPairs);
+                int *nonZeroPairs = (int *) ALLOCMEMORY(NULL, NULL, int, 1);
+                double ua = mannwhitney (cpg->groupA, noA, cpg->groupB, noB, nonZeroPairs, cpg->useBartlett, sam_par);
+		            double p= mannwhitneyPvalue(ua, noA, noB, nfo.MWU, MAXM, MAXN, *nonZeroPairs, cpg->useFoldedNormal);
                 FREEMEMORY(NULL, nonZeroPairs);
 		            double ratio = get_meandiff(cpg, cpg->groupA, noA, cpg->groupB, noB);
             //    fprintf(stdout, "#%s\t%d\t%d\t.\t%.2g\t%f\n",cpg->chr, cpg->start,cpg->stop,ratio,p);
@@ -2633,36 +2658,48 @@ int main(int argc, char** argv) {
   if(nfo.mode == 1 || nfo.mode == 2) {
     fprintf(stderr, "Number of Tests: %d\n", nfo.outputList->numberTests);
     multiple_testing_correction(nfo.outputList, nfo.mode, nfo.mtc);
+    if (nfo.useFoldedNormal){
+      // if useFoldedNoraml == true, p value and q value is supressed
 
-    std::vector<double> fnpvalue;
-    fnpvalue.clear();
-       for(int i=0;i<nfo.outputList->i;i++){
-      if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
+      std::vector<double> fnpvalue;
+      for(int i=0;i<nfo.outputList->i;i++){
+       if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
          fnpvalue.push_back(nfo.outputList->segment_out_st[i].mwu);
          }
       }
-    std::vector<double> fnpvalue_re = padj_bh(fnpvalue);
+      std::vector<double> fnpvalue_re = padj_bh(fnpvalue, false);
 
-    fprintf(stdout, "%s",
-    "chr\tstart\tstop\tabs.methyl.diff\tCpGs\tpFN\t5mC.A\t5mC.B\tFDR\n");
-    int jj = 0;
-
-    for(int i=0;i<nfo.outputList->i;i++){
+      for(int i=0;i<nfo.outputList->i;i++){
       if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
         fprintf(stdout, "%s\t%d\t%d\t%f\t%d\t%.5g\t%.5g\t%.5g\t%.5g\n",
                 nfo.outputList->segment_out_st[i].chr,
                 nfo.outputList->segment_out_st[i].start,
                 nfo.outputList->segment_out_st[i].stop,
-                //nfo.outputList->segment_out_st[i].q,
                 nfo.outputList->segment_out_st[i].meandiff,
                 nfo.outputList->segment_out_st[i].length,
                 nfo.outputList->segment_out_st[i].mwu,
-                //nfo.outputList->segment_out_st[i].p,
                 nfo.outputList->segment_out_st[i].methA,
                 nfo.outputList->segment_out_st[i].methB,
-                fnpvalue_re[jj]);
-        ++jj;
+                fnpvalue_re[i]
+                );
         }
+    }
+    }else{
+          for(int i=0;i<nfo.outputList->i;i++){
+      if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
+        fprintf(stdout, "%s\t%d\t%d\t%.5g\t%f\t%d\t%.5g\t%.5g\t%.5g\t%.5g\n",
+                nfo.outputList->segment_out_st[i].chr,
+                nfo.outputList->segment_out_st[i].start,
+                nfo.outputList->segment_out_st[i].stop,
+                nfo.outputList->segment_out_st[i].q,
+                nfo.outputList->segment_out_st[i].meandiff,
+                nfo.outputList->segment_out_st[i].length,
+                nfo.outputList->segment_out_st[i].mwu,
+                nfo.outputList->segment_out_st[i].p,
+                nfo.outputList->segment_out_st[i].methA,
+                nfo.outputList->segment_out_st[i].methB);
+        }
+    }
     }
   }
 

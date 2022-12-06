@@ -10,7 +10,7 @@
   CTAGS=ctags > tags
   LIBS=
 
-  METSEGOBJ = src/manopt.o\
+  METSEGOBJ = src/manopt-win.o\
 	src/memory.o\
 	src/debug.o\
 	src/info.o\
@@ -22,7 +22,6 @@
 	src/vstack.o\
 	src/segmentstack.o\
 	src/mtc.o\
-	src/utils.o\
 	src/metseg.o
 	
 
@@ -36,7 +35,7 @@ clean:
 	rm -f test.mr.DMR
 
 test1: 
-	./pmat -t 32 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
+	./pmat -t 2 -a A -b B -X 8 -Y 8 -m 5 -d 0.05 ../examples/test.dat > test.mr.DMR
 
 test: test1
 

@@ -1,0 +1,6 @@
+a: 0.60105772
+b: 0.
+c: -4.0224
+d: 0.89
+useBartlett: 1
+useFoldedNormal: 1
