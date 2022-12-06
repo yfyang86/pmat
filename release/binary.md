@@ -1,3 +1,9 @@
+**NOTE**: This binary does not include `libgsl`. User should install by themselves:
+
+- Linux: `apt install libgsl-dev`
+- Mac: `brew install gsl`
+- Windows: Use Rtools
+
 ## Linux
 
 Build Env:
