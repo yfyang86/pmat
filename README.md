@@ -174,37 +174,39 @@ chr1    837884  838368  0.106765        14      0.12877 0.84016 0.81546
 chr1    848507  848646  0.076560        5       0.5     0.67124 0.65959
 chr1    136631  136718  0.140452        6       0.015472        0.85088 0.83067
 ```
-The following table explains the columns in output file.
 
-| Column| Comment | Example |
-|:--------|:--------|:--------|
-| 1 | chromosome | Example: chr1 |
-| 2| start  | Example: 661864 |
-| 3 | end | Example: 661928 |
-| 4 | avarge absolute 5mC difference between pairs| Example: 0.066676 |
-| 5| #CpGs in a region | Example: 5 |
-| 6 | p-value via FN-C test or FN test | Example: 0.0021516 |
-| 7 | average 5mC in one group| Example: 0.75823 |
-| 8 | average 5mC in the other group | Example: 0.79141 |
+The following table explains the columns in output file (with column Names).
 
+| Column| Name | Comment | Example |
+|:--------|:--------|:--------|:--------|
+| 1 | chr | chromosome | Example: chr1 |
+| 2 | start | start  | Example: 661864 |
+| 3 | stop | end | Example: 661928 |
+| 4 | abs.methyl.diff | avarge absolute 5mC difference between pairs| Example: 0.066676 |
+| 5 | CpGs | #CpGs in a region | Example: 5 |
+| 6 | pFN | p-value via FN-C test or FN test | Example: 0.0021516 |
+| 7 | 5mC.A | average 5mC in one group| Example: 0.75823 |
+| 8 | 5mC.B | average 5mC in the other group | Example: 0.79141 |
+| 9 | FDR | ajusted p-value (FDR) by B-H method | Example: 0.55623 |
 
-Run the following command to add column names and FDR value via BH method. (Perl script is available upon request.)
-
-```bash
-echo -e "chr\tstart\tstop\tabs.methyl.diff\tCpGs\tpFN\t5mC.A\t5mC.B" > test.mr.DMR.fdr
-num_lines.pl test.mr.DMR > o
-pvalues_BP_correction.pl o 0 8 | sort -n -k1 | mycut.pl -v -f1 | format_tab.pl >> test.mr.DMR.fdr
-```
-
-Alternatively, readers can add column names and FDR values via BH method using the following R script.
+Users could extend/verify the last column (FDR) by the follorwing R script. We should point out `method = "BH"` and `method = "fdr"` calculate the same statistic in R `p.adjust()`.
 ```R
-data <- read.table("test.mr.DMR", header = F)
-colnames(data) <- c("chr", "start", "stop", "abs.methyl.diff", "CpGs", "pFN", "5mC.A", "5mC.B")
-data$FDR <- p.adjust(data$pFN, method = "BH")
-write.table(data, "test.mr.DMR.fdr", row.names= F, sep = "\t", quote = F)
+data <- read.table("test.mr.DMR", header = T)
+FDR2 <- p.adjust(data$pFN, method = "BH")
+#### Verification ####
+# plot(data$FDR, FDR2, xlab = 'PMAT', ylab = 'R-p.adjust',
+#      xlim = c(0,1), ylim = c(0,1))
+var(data$FDR / FDR2)
+#> [1] 1.70628e-10
 ```
 
+The result illustrates that `PMAT` and `R::p.adjust` derive the same `fdr`.
 
+**NOTE**: Other p-value adjustments are possible in R, but they are not within the scope of PMAT. We provide a simple R script `caladj.R` for users with this intrest.
+```bash
+Rscript caladj.R DMR_OUTPUT_of_PMAT [METHOD]
+```
+Here `[METHOD]` is optional, it could be one of  `holm`, `hochberg`, `hommel`, `bonferroni`, `BH`, `BY`, `fdr`, and `none`. By default, we use `fdr` (`BH`). Please check the manual of `p.adjust` in R for more details. For example `Rscript caladj.R test.mr.DMR fdr` will generate a `test.mr.DMR.fdr` file, with `FDR` value as the last column.
 
 ## License
 
@@ -221,7 +223,7 @@ C/C++ version (in the `./proc` folder):
   - [x] Windows
 - [ ] 2022-11: Example/Simulation
 	- [x] Simple demo
-	- [ ] Full example (in plan)
+	- [x] Full example (in plan)
 - [ ] Config file support for the Bartlett correction : In the comming Version
   - [x] Documentation and Examples.
   - [ ] `Config.txt` support without re-compile. 

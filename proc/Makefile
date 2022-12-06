@@ -22,6 +22,7 @@
 	src/vstack.o\
 	src/segmentstack.o\
 	src/mtc.o\
+	src/utils.o\
 	src/metseg.o
 	
 

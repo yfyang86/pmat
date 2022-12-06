@@ -33,6 +33,7 @@
 #include <ctype.h>
 #include <float.h>
 #include "mm2.h" //ad by xp
+#include "utils.h"
 
 #define MAXN 13
 #define MAXM 13
@@ -2632,9 +2633,23 @@ int main(int argc, char** argv) {
   if(nfo.mode == 1 || nfo.mode == 2) {
     fprintf(stderr, "Number of Tests: %d\n", nfo.outputList->numberTests);
     multiple_testing_correction(nfo.outputList, nfo.mode, nfo.mtc);
+
+    std::vector<double> fnpvalue;
+    fnpvalue.clear();
+       for(int i=0;i<nfo.outputList->i;i++){
+      if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
+         fnpvalue.push_back(nfo.outputList->segment_out_st[i].mwu);
+         }
+      }
+    std::vector<double> fnpvalue_re = padj_bh(fnpvalue);
+
+    fprintf(stdout, "%s",
+    "chr\tstart\tstop\tabs.methyl.diff\tCpGs\tpFN\t5mC.A\t5mC.B\tFDR\n");
+    int jj = 0;
+
     for(int i=0;i<nfo.outputList->i;i++){
       if(nfo.outputList->segment_out_st[i].meandiff >= nfo.minMethDist || nfo.outputList->segment_out_st[i].meandiff <= -1* nfo.minMethDist) {
-        fprintf(stdout, "%s\t%d\t%d\t%f\t%d\t%.5g\t%.5g\t%.5g\n",
+        fprintf(stdout, "%s\t%d\t%d\t%f\t%d\t%.5g\t%.5g\t%.5g\t%.5g\n",
                 nfo.outputList->segment_out_st[i].chr,
                 nfo.outputList->segment_out_st[i].start,
                 nfo.outputList->segment_out_st[i].stop,
@@ -2644,7 +2659,9 @@ int main(int argc, char** argv) {
                 nfo.outputList->segment_out_st[i].mwu,
                 //nfo.outputList->segment_out_st[i].p,
                 nfo.outputList->segment_out_st[i].methA,
-                nfo.outputList->segment_out_st[i].methB);
+                nfo.outputList->segment_out_st[i].methB,
+                fnpvalue_re[jj]);
+        ++jj;
         }
     }
   }

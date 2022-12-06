@@ -8,16 +8,15 @@
 #include <iostream>
 #include <map>
 #include <random>
+#include <algorithm>
+#include <vector>
 
 static std::map<std::string, int> solver_sam_load_config_setting();
 void solver_sam_load_config(double * conifg);
 
 
-#include <map>
-#include <algorithm>
-#include <vector>
 
-#include <iostream>
+
 
 struct  order_tie
 {
